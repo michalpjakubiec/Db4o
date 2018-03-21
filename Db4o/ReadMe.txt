@@ -25,6 +25,6 @@ osoba - - - - - telefon
 2. Dodaj/usuń/modyfikuj adres wskazanej osoby.
 3. Dodaj/usuń/modyfikuj telefon do listy telefonów.
 // przy usuwaniu osoby należy usunąć wszystkie jej adresy i telefony
-// modyfikacja modyfiuje obiekt a nie tworzy nowy.
+// modyfikacja modyfikuje obiekt a nie tworzy nowy.
 4. Pokazanie danych konkretnej osoby.
 5. Statystyka - wyświetlenie iczbby obiektów poszczególnych klas.

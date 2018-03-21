@@ -1,6 +1,8 @@
-﻿namespace Nbd_Db4o
+﻿using System.Collections.Generic;
+
+namespace Nbd_Db4o
 {
-    public class Phone
+    public class Phone : List<Phone>
     {
         public string Number { get; set; }
         public string OperatorName { get; set; }
@@ -17,7 +19,7 @@
 
         public override string ToString()
         {
-            return string.Format("{0}, {1}, {2}", Type, Number, OperatorName);
+            return string.Format("{0}, {1}, {2}", Number, Type, OperatorName);
         }
     }
 }

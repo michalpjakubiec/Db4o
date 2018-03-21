@@ -32,7 +32,7 @@ namespace Nbd_Db4o
 
             Console.WriteLine("Statystyka bazy");
             Console.WriteLine();
-            Console.WriteLine($"Osób:\t {resultPersons.Count}");
+            Console.WriteLine($"Osób:\t\t {resultPersons.Count}");
             Console.WriteLine($"Adresów:\t {resultAddress.Count}");
             Console.WriteLine($"Telefonów:\t {resultPhones.Count}");
         }
@@ -43,7 +43,7 @@ namespace Nbd_Db4o
             {
                 FirstName = "Jan",
                 LastName = "Kowalski",
-                Address = new Address(),
+                //Address = new Address(),
                 //{
                 //    Street = "Kolorowa 2",
                 //    PostCode = "12-234",
@@ -60,13 +60,13 @@ namespace Nbd_Db4o
             {
                 FirstName = "Adam",
                 LastName = "Nowak",
-                Address = new Address(),
+                //Address = new Address(),
                 //{
                 //    Street = "Kosmiczna 10",
                 //    PostCode = "32-567",
                 //    City = "Kraków"
                 //},
-                Phones = new List<Phone>()
+                //Phones = new List<Phone>()
                 //{
                 //    new Phone("123654378", "Play", "mobilny"),
                 //    new Phone("456234556", "Orange", "służbowy")
@@ -79,20 +79,38 @@ namespace Nbd_Db4o
                 LastName = "Adamus",
                 Address = new Address()
                 {
-                    Street = "Zielona",
+                    Street = "ul. Zielona 54",
                     PostCode = "14-256",
                     City = "Bielsko-Biała"
                 },
                 Phones = new List<Phone>()
                 {
                     new Phone("435765379", "VirginMobile", "służbowy"),
-                    new Phone("098769578", "Orange", "stacjonarny")
                 }
+            };
+
+
+            var person4 = new Person()
+            {
+                FirstName = "Han",
+                LastName = "Solo",
+                Address = new Address()
+                {
+                    Street = "ul. Gwiezdna 11",
+                    PostCode = "12-121",
+                    City = "Tatooine"
+                },
+                //Phones = new List<Phone>()
+                //{
+                //    new Phone("435765379", "VirginMobile", "służbowy"),
+                //    new Phone("098769578", "Orange", "stacjonarny")
+                //}
             };
 
             db.Store(person1);
             db.Store(person2);
             db.Store(person3);
+            db.Store(person4);
         }
     }
 }

@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="Db4oDelete.cs" />
     <Compile Include="Db4oModify.cs" />
     <Compile Include="Db4oQueries.cs" />
     <Compile Include="Db4oRetrieve.cs" />

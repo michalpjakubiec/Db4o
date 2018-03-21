@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Db4objects.Db4o;
-using Db4objects.Db4o.Query;
 using static Nbd_Db4o.Db4oQueries;
 
 namespace Nbd_Db4o
@@ -14,29 +11,6 @@ namespace Nbd_Db4o
             IObjectSet result = db.QueryByExample(typeof(Person));
             ListResult(result);
         }
-        public static void RetrieveAllAlt(IObjectContainer db)
-        {
-            IObjectSet resultPersons = db.QueryByExample(typeof(Person));
-            IObjectSet resultAddress = db.QueryByExample(typeof(Address));
-
-            var retrievedPersonsList = new List<object>();
-            var retrievedAddressList = new List<object>();
-
-            foreach (var person in resultPersons)
-            {
-                retrievedPersonsList.Add(person);
-            }
-
-            foreach (var address in resultAddress)
-            {
-                retrievedAddressList.Add(address);
-            }
-
-            foreach (var a in retrievedPersonsList.Zip(retrievedAddressList, (t, w) => new { t, w }))
-            {
-                Console.WriteLine(a.t + " " + a.w);
-            }
-        }
 
         public static void RetrievePersonByName(IObjectContainer db)
         {
@@ -47,22 +21,37 @@ namespace Nbd_Db4o
             Console.Write("Nazwisko:\t");
             string lastName = Console.ReadLine();
 
-            Person proto = new Person(firstName, lastName);
-            IObjectSet result = db.QueryByExample(proto);
-
-            Console.WriteLine();
-
-            if (result.Count > 0)
+            try
             {
-                foreach (object item in result)
+                Person ex = new Person(firstName, lastName);
+                IObjectSet result = db.QueryByExample(ex);
+                Person found = (Person)result.Next();
+
+                if (found.Address == null)
+                    Console.WriteLine("Brak adresów w bazie.");
+                else
                 {
-                    Console.WriteLine(item);
+                    Console.Write("Adres:\t\t");
+                    Console.WriteLine(found.Address);
+                }
+
+                if (found.Phones == null)
+                    Console.WriteLine("Brak telefonów w bazie.");
+                else
+                {
+                    Console.WriteLine("Telefony:\t");
+                    foreach (var phone in found.Phones)
+                    {
+                        Console.WriteLine($"\t\t{phone}");
+                    }
                 }
             }
-            else
-                Console.WriteLine("Brak wyników dla zapytania.");
+            catch (Exception e)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Taka osoba nie istnieje. Nie można kontynuować.");
+            }
         }
     }
-
 }
 

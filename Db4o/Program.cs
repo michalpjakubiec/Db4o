@@ -4,6 +4,7 @@ using static Nbd_Db4o.Db4oQueries;
 using static Nbd_Db4o.Db4oStore;
 using static Nbd_Db4o.Db4oModify;
 using static Nbd_Db4o.Db4oRetrieve;
+using static Nbd_Db4o.Db4oDelete;
 
 namespace Nbd_Db4o
 {
@@ -19,7 +20,23 @@ namespace Nbd_Db4o
 
                 while (true)
                 {
-                    Menu.Draw();
+                    //Menu.Draw();
+                    Console.WriteLine("1)\tDodaj osobę");
+                    Console.WriteLine("2)\tDodaj adres");
+                    Console.WriteLine("3)\tDodaj telefon");
+
+                    Console.WriteLine("4)\tModyfikuj osobę");
+                    Console.WriteLine("5)\tModyfikuj adres");
+                    Console.WriteLine("6)\tModyfikuj telefon");
+
+                    Console.WriteLine("7)\tUsuń osobę");
+                    Console.WriteLine("8)\tUsuń adres");
+                    Console.WriteLine("9)\tUsuń telefon");
+
+                    Console.WriteLine("0)\tWyświetl dane konkretnej osoby");
+                    Console.WriteLine("STATS\tStatystyka");
+                    Console.WriteLine();
+                    Console.WriteLine("Q)\tWyjście");
 
                     string menuChoice = Console.ReadLine()?.ToUpper();
 
@@ -27,34 +44,50 @@ namespace Nbd_Db4o
                     switch (menuChoice)
                     {
                         case "1":
-                            AddPerson(db);
+                            StorePerson(db);
                             Menu.BottomLine();
                             break;
                         case "2":
-                            AddAddress(db);
+                            StoreAddress(db);
                             Menu.BottomLine();
                             break;
                         case "3":
-                            AddPhone(db);
+                            StorePhone(db);
                             Menu.BottomLine();
                             break;
                         case "4":
+                            ModifyPerson(db);
+                            Menu.BottomLine();
+                            break;
+                        case "5":
                             ModifyAddress(db);
                             Menu.BottomLine();
                             break;
-                        case "Q":
-                            RetrieveAll(db);
+                        case "6":
+                            ModifyPhone(db);
                             Menu.BottomLine();
                             break;
-                        case "W":
+                        case "7":
+                            DeletePerson(db);
+                            Menu.BottomLine();
+                            break;
+                        case "8":
+                            DeleteAddress(db);
+                            Menu.BottomLine();
+                            break;
+                        case "9":
+                            DeletePhones(db);
+                            Menu.BottomLine();
+                            break;
+                        case "0":
                             RetrievePersonByName(db);
                             Menu.BottomLine();
                             break;
-                        case "E":
+                        case "STATS":
                             DisplayStats(db);
                             Menu.BottomLine();
                             break;
-                        case "Z":
+                        case "Q":
                             db.Close();
                             Environment.Exit(0);
                             break;
@@ -62,65 +95,10 @@ namespace Nbd_Db4o
                             break;
                     }
                 }
-
-                //AddPerson(db);
-                //}
-                //StoreFirstPilot(db);
-                //StoreSecondPilot(db);
-                //RetrieveAllPilots(db);
-                //RetrievePilotByExactPoints(db);
-                //UpdatePilot(db);
-                //DeleteFirstPilotByName(db);
-                //DeleteSecondPilotByName(db);
+                
 
             }
         }
     }
 }
-
-//public static void UpdatePerson(IObjectContainer db, Person person)
-//{
-//    IObjectSet result = db.QueryByExample(person);
-//    Person found = (Person)result.Next();
-//    found.AddPoints(11);
-//    db.Store(found);
-//    Console.WriteLine("Added 11 points for {0}", found);
-//    RetrieveAllPilots(db);
-//}
-
-//public static void RetrieveAllPilotQBE(IObjectContainer db)
-//{
-//    Pilot proto = new Pilot(null, 0);
-//    IObjectSet result = db.QueryByExample(proto);
-//    ListResult(result);
-//}     
-
-//public static void RetrievePilotByName(IObjectContainer db)
-//{
-//    Pilot proto = new Pilot("Michael Schumacher", 0);
-//    IObjectSet result = db.QueryByExample(proto);
-//    ListResult(result);
-//}
-//public static void RetrievePilotByExactPoints(IObjectContainer db)
-//{
-//    Pilot proto = new Pilot(null, 100);
-//    IObjectSet result = db.QueryByExample(proto);
-//    ListResult(result);
-//}
-//public static void DeleteFirstPilotByName(IObjectContainer db)
-//{
-//    IObjectSet result = db.QueryByExample(new Pilot("Michael Schumacher", 0));
-//    Pilot found = (Pilot)result.Next();
-//    db.Delete(found);
-//    Console.WriteLine("Deleted {0}", found);
-//    RetrieveAllPilots(db);
-//}
-//public static void DeleteSecondPilotByName(IObjectContainer db)
-//{
-//    IObjectSet result = db.QueryByExample(new Pilot("Rubens Barrichello", 0));
-//    Pilot found = (Pilot)result.Next();
-//    db.Delete(found);
-//    Console.WriteLine("Deleted {0}", found);
-//    RetrieveAllPilots(db);
-//}
 

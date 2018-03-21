@@ -10,17 +10,34 @@ namespace Nbd_Db4o
         public List<Phone> Phones { get; set; }
 
         public Person() { }
+        public Person(string firstName, string lastName, Address address, List<Phone> phones)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Address = address;
+            Phones = phones;
+        }
         public Person(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
         }
 
+        public void AddAddress(Address address)
+        {
+            Address = address;
+        }
+
+        public void AddPhone(Phone phone)
+        {
+            if (Phones != null) Phones.Add(phone);
+            else
+                Phones = new List<Phone> { phone };
+        }
+
         public override string ToString()
         {
-            return string.Format($"{FirstName,-15} {LastName,-15}" +
-                                 $"{Address.Street, -15} {Address.PostCode, -8} {Address.City, -5}" +
-                                 $"{Phones}");
+            return string.Format($"{FirstName} {LastName}");
         }
     }
 }

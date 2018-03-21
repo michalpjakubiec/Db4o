@@ -7,7 +7,7 @@ namespace Nbd_Db4o
         public static void Draw()
         {
             Console.WriteLine("\t1.\tDodaj osobę");
-            Console.WriteLine("\t2.\tDodaj\\modyfikuj adres");
+            Console.WriteLine("\t2.\tDodaj adres");
             Console.WriteLine("\t3.\tDodaj telefon");
 
             Console.WriteLine("\t4.\tModyfikuj osobę");
