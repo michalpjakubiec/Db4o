@@ -18,84 +18,143 @@ namespace Nbd_Db4o
             {
                 CreateExampleDb(db);
 
-                while (true)
+                //do
+                //{
+                //    Console.Clear();
+                //    Console.WriteLine("Pick an option . . .");
+
+                //    for (c = 0; c < menuItems.Length; c++)
+                //    {
+                //        if (curItem == c)
+                //        {
+                //            Console.Write(">>");
+                //            Console.WriteLine(menuItems[c]);
+                //        }
+                //        else
+                //        {
+                //            Console.WriteLine(menuItems[c]);
+                //        }
+                //    }
+                //    key = Console.ReadKey(true);
+
+                //    if (key.Key.ToString() == "DownArrow")
+                //    {
+                //        curItem++;
+                //        if (curItem > menuItems.Length - 1) curItem = 0;
+                //    }
+                //    else if (key.Key.ToString() == "UpArrow")
+                //    {
+                //        curItem--;
+                //        if (curItem < 0) curItem = Convert.ToInt16(menuItems.Length - 1);
+                //    }
+                //} while (key.KeyChar != 13);
+                //////////////////////////////////////////////////
+
+                string[] menuItems = { "Dodaj\\modyfikuj\\usuń osobę",
+                                       "Dodaj\\modyfikuj\\usuń adres",
+                                       "Dodaj\\modyfikuj\\usuń telefon",
+                                       "Wyświetl dane konkretnej osoby",
+                                       "Wyświetl wszystkie osoby w bazie",
+                                       "Statystyka"
+                                     };
+
+                int curItem = 0, c;
+                ConsoleKeyInfo key;
+
+                do
                 {
-                    //Menu.Draw();
-                    Console.WriteLine("1)\tDodaj osobę");
-                    Console.WriteLine("2)\tDodaj adres");
-                    Console.WriteLine("3)\tDodaj telefon");
+                    Console.Clear();
+                    Console.WriteLine("Wybierz opcję . . .");
+                    int choice;
 
-                    Console.WriteLine("4)\tModyfikuj osobę");
-                    Console.WriteLine("5)\tModyfikuj adres");
-                    Console.WriteLine("6)\tModyfikuj telefon");
+                    for (c = 0; c < 6; c++)
+                    {
+                        if (curItem == c)
+                        {
+                            Console.BackgroundColor = ConsoleColor.White;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.WriteLine(menuItems[c].PadRight(Console.WindowWidth - 1));
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.WriteLine(menuItems[c].PadRight(Console.WindowWidth - 1));
+                        }
+                    }
+                    choice = curItem;
+                    key = Console.ReadKey(true);
 
-                    Console.WriteLine("7)\tUsuń osobę");
-                    Console.WriteLine("8)\tUsuń adres");
-                    Console.WriteLine("9)\tUsuń telefon");
-
-                    Console.WriteLine("0)\tWyświetl dane konkretnej osoby");
-                    Console.WriteLine("STATS\tStatystyka");
-                    Console.WriteLine();
-                    Console.WriteLine("Q)\tWyjście");
-
-                    string menuChoice = Console.ReadLine()?.ToUpper();
+                    if (key.Key == ConsoleKey.DownArrow)
+                    {
+                        curItem++;
+                        if (curItem > menuItems.Length - 1) curItem = 0;
+                    }
+                    else if (key.Key == ConsoleKey.UpArrow)
+                    {
+                        curItem--;
+                        if (curItem < 0) curItem = Convert.ToInt16(menuItems.Length - 1);
+                    }
 
                     Console.Clear();
-                    switch (menuChoice)
+                    if (key.Key == ConsoleKey.Enter)
                     {
-                        case "1":
-                            StorePerson(db);
-                            Menu.BottomLine();
-                            break;
-                        case "2":
-                            StoreAddress(db);
-                            Menu.BottomLine();
-                            break;
-                        case "3":
-                            StorePhone(db);
-                            Menu.BottomLine();
-                            break;
-                        case "4":
-                            ModifyPerson(db);
-                            Menu.BottomLine();
-                            break;
-                        case "5":
-                            ModifyAddress(db);
-                            Menu.BottomLine();
-                            break;
-                        case "6":
-                            ModifyPhone(db);
-                            Menu.BottomLine();
-                            break;
-                        case "7":
-                            DeletePerson(db);
-                            Menu.BottomLine();
-                            break;
-                        case "8":
-                            DeleteAddress(db);
-                            Menu.BottomLine();
-                            break;
-                        case "9":
-                            DeletePhones(db);
-                            Menu.BottomLine();
-                            break;
-                        case "0":
-                            RetrievePersonByName(db);
-                            Menu.BottomLine();
-                            break;
-                        case "STATS":
-                            DisplayStats(db);
-                            Menu.BottomLine();
-                            break;
-                        case "Q":
-                            db.Close();
-                            Environment.Exit(0);
-                            break;
-                        default:
-                            break;
+                        switch (choice)
+                        {
+                            case 0:
+                                StorePerson(db);
+                                Menu.BottomLine();
+                                break;
+                            case 2:
+                                StoreAddress(db);
+                                Menu.BottomLine();
+                                break;
+                            case 3:
+                                StorePhone(db);
+                                Menu.BottomLine();
+                                break;
+                            case 4:
+                                ModifyPerson(db);
+                                Menu.BottomLine();
+                                break;
+                            case 5:
+                                ModifyAddress(db);
+                                Menu.BottomLine();
+                                break;
+                            case 6:
+                                ModifyPhone(db);
+                                Menu.BottomLine();
+                                break;
+                            case 7:
+                                DeletePerson(db);
+                                Menu.BottomLine();
+                                break;
+                            case 8:
+                                DeleteAddress(db);
+                                Menu.BottomLine();
+                                break;
+                            case 9:
+                                DeletePhones(db);
+                                Menu.BottomLine();
+                                break;
+                            case 10:
+                                RetrievePersonByName(db);
+                                Menu.BottomLine();
+                                break;
+                            case 11:
+                                DisplayStats(db);
+                                Menu.BottomLine();
+                                break;
+                            case 12:
+                                db.Close();
+                                Environment.Exit(0);
+                                break;
+                            default:
+                                break;
+                        }
                     }
-                }
-                
+
+                } while (key.KeyChar != 13);
+
 
             }
         }

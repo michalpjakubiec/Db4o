@@ -27,9 +27,6 @@ namespace Nbd_Db4o
             IObjectSet resultAddress = db.QueryByExample(typeof(Address));
             IObjectSet resultPhones = db.QueryByExample(typeof(Phone));
 
-            var retrievedPersonsList = new List<object>();
-            var retrievedAddressList = new List<object>();
-
             Console.WriteLine("Statystyka bazy");
             Console.WriteLine();
             Console.WriteLine($"Osób:\t\t {resultPersons.Count}");

@@ -34,6 +34,12 @@ namespace Nbd_Db4o
                 IObjectSet result = db.QueryByExample(ex);
                 Person found = (Person)result.Next();
 
+                if (found.Address != null)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Adres już istnieje. Nie można dodać nowego.");
+                    return;
+                }
                 Console.WriteLine();
                 Console.WriteLine("Podaj nowy adres:");
                 Console.WriteLine();

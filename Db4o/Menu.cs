@@ -4,7 +4,7 @@ namespace Nbd_Db4o
 {
     static class Menu
     {
-        public static void Draw()
+        public static void MainMenu()
         {
             Console.WriteLine("\t1.\tDodaj osobę");
             Console.WriteLine("\t2.\tDodaj adres");
